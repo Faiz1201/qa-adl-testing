@@ -2,6 +2,7 @@ package tests;
 
 import base.BaseTest;
 import client.InvoiceClient;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -35,6 +36,7 @@ public class InvoiceDetailTest extends BaseTest {
 
         Response response =
                 given()
+                        .filter(new AllureRestAssured())
                         .header("Authorization","Bearer "+token)
                         .when()
                         .get("/invoices/inv_999");
@@ -49,6 +51,7 @@ public class InvoiceDetailTest extends BaseTest {
 
         Response response =
                 given()
+                        .filter(new AllureRestAssured())
                         .header("Authorization","Bearer "+token)
                         .when()
                         .get("/invoices/abc");

@@ -1,6 +1,7 @@
 package tests;
 
 import base.BaseTest;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -19,6 +20,7 @@ public class UnbilledBusinessLogicTest extends BaseTest {
 
         Response invoiceResponse =
                 given()
+                        .filter(new AllureRestAssured())
                         .header("Authorization","Bearer " + token)
                         .when()
                         .get("/invoices");

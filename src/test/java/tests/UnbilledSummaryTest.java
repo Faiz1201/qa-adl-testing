@@ -1,6 +1,7 @@
 package tests;
 
 import base.BaseTest;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -15,6 +16,7 @@ public class UnbilledSummaryTest extends BaseTest {
         String token = AuthHelper.getToken();
         Response response =
                 given()
+                        .filter(new AllureRestAssured())
                         .header("Authorization","Bearer "+token)
                         .when()
                         .get("/invoices/unbilled/summary");
@@ -25,6 +27,7 @@ public class UnbilledSummaryTest extends BaseTest {
     public void noToken(){
         Response response =
                 given()
+                        .filter(new AllureRestAssured())
                         .when()
                         .get("/invoices/unbilled/summary");
         Assert.assertEquals(response.getStatusCode(),401);
@@ -34,6 +37,7 @@ public class UnbilledSummaryTest extends BaseTest {
     public void invalidToken(){
         Response response =
                 given()
+                        .filter(new AllureRestAssured())
                         .header("Authorization","Bearer invalid123")
                         .when()
                         .get("/invoices/unbilled/summary");

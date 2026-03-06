@@ -1,5 +1,6 @@
 package client;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.response.Response;
 import model.LoginRequest;
 
@@ -9,6 +10,7 @@ public class AuthClient {
 
     public Response login(LoginRequest body){
         return given()
+                .filter(new AllureRestAssured())
                 .header("Content-Type", "application/json")
                 .body(body)
                 .when()
